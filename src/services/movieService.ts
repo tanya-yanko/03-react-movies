@@ -5,7 +5,7 @@ export interface GetMovieRes {
   results: Movie[];
 }
 
-const BASE_URL = "https://api.themoviedb.org/3"; // ✅ виправлено
+const BASE_URL = "https://api.themoviedb.org/3";
 const TOKEN = import.meta.env.VITE_TMDB_TOKEN;
 
 export const fetchMovies = async (newQuery: string): Promise<Movie[]> => {
@@ -13,8 +13,7 @@ export const fetchMovies = async (newQuery: string): Promise<Movie[]> => {
     throw new Error("TMDB token is missing in .env");
   }
 
-  const res = await axios.get<GetMovieRes>("/search/movie", {
-    baseURL: BASE_URL, // ✅ тепер все правильно
+  const res = await axios.get<GetMovieRes>(`${BASE_URL}/search/movie`, {
     headers: {
       accept: "application/json",
       Authorization: `Bearer ${TOKEN}`,
